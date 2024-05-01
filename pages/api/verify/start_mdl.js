@@ -2,12 +2,12 @@ import fetch from "node-fetch";
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
 const AUTH0_SECRET = process.env.AUTH0_SECRET;
-const TEMPLATE_ID = process.env.TEMPLATE_ID;
+const TEMPLATE_ID = process.env.TEMPLATE_ID_MDL;
 
 if (!AUTH0_DOMAIN) throw new Error("AUTH0_DOMAIN not set");
 if (!AUTH0_CLIENT_ID) throw new Error("AUTH0_CLIENT_ID not set");
 if (!AUTH0_SECRET) throw new Error("AUTH0_SECRET not set");
-if (!TEMPLATE_ID) throw new Error("TEMPLATE_ID not set");
+if (!TEMPLATE_ID) throw new Error("TEMPLATE_ID_MDL not set");
 
 export default async function handler(req, res) {
   try {
@@ -29,6 +29,7 @@ async function run() {
       client_id: AUTH0_CLIENT_ID,
       client_secret: AUTH0_SECRET,
       template_id: TEMPLATE_ID,
+      redirect_uri: "http://localhost:3000",
     }),
   });
   const { url, request_id, expires_at } = await result.json();
