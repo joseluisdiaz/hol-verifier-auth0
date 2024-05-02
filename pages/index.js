@@ -227,7 +227,8 @@ export default function Home() {
                                 bounce: 0.5,
                             }}
                             className={cn(
-                                'h-56 w-full rounded-[26px] border-8 border-black/20 bg-stone-100 p-5 shadow-xl backdrop-blur-2xl'
+                                'h-56 w-full rounded-[26px] border-8 border-black/20 bg-stone-100 p-5 shadow-xl backdrop-blur-2xl',
+                                presentationVP && 'h-80'
                             )}
                         >
                             {!presentationVP &&
@@ -291,9 +292,26 @@ export default function Home() {
                             )}
 
                             {status === VP_VERIFIED && (
-                                <motion.p className="text-center text-sm">
-                                    All Done
-                                </motion.p>
+                                <motion.div className="flex flex-col items-center gap-2 font-semibold text-green-700">
+                                    <svg
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 60 60"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M59.3332 30C59.3332 46.2004 46.2002 59.3334 29.9998 59.3334C13.7995 59.3334 0.666504 46.2004 0.666504 30C0.666504 13.7997 13.7995 0.666687 29.9998 0.666687C46.2002 0.666687 59.3332 13.7997 59.3332 30ZM19.124 27.8857L26.6665 35.4282L41.7514 20.3432L45.5227 24.1145L29.4949 40.1422C27.9328 41.7043 25.4002 41.7043 23.8381 40.1422L15.3528 31.6569L19.124 27.8857Z"
+                                            fill="#047857"
+                                        />
+                                    </svg>
+
+                                    <motion.p className="text-center text-sm">
+                                        All Done
+                                    </motion.p>
+                                </motion.div>
                             )}
 
                             <AnimatePresence>

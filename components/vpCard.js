@@ -8,7 +8,7 @@ function getAttribute(presentation, key) {
 export const VpCard = (presentation) => (
     <AnimatePresence>
         <motion.div className="flex flex-row gap-2">
-            <div className="flex flex-col gap-2">
+            <div className="flex max-w-40 flex-col gap-2">
                 <div className="flex flex-col">
                     <span className="text-xs uppercase text-[#046B99]">
                         Name
