@@ -1,5 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
+function formatDate(date) {
+    return new Date(date).toISOString().split('T')[0];
+}
+
 function getAttribute(presentation, key) {
     return presentation?.attributes?.['org.iso.18013.5.1']?.[key]
 }
@@ -44,7 +48,7 @@ export const MdlCard = (presentation) => (
                         Date of Birth
                     </span>
                     <span className="text-sm">
-                        {getAttribute(presentation, 'birth_date')}
+                        {formatDate(getAttribute(presentation, 'birth_date'))}
                     </span>
                 </div>
 
@@ -53,7 +57,7 @@ export const MdlCard = (presentation) => (
                         Expiry date
                     </span>
                     <span className="text-sm">
-                        {getAttribute(presentation, 'expiry_date')}
+                        {formatDate(getAttribute(presentation, 'expiry_date'))}
                     </span>
                 </div>
             </div>

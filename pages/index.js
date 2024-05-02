@@ -319,7 +319,7 @@ export default function Home() {
                                     </svg>
 
                                     <motion.p className="text-center text-sm">
-                                        All Done
+                                        Qualified
                                     </motion.p>
                                 </motion.div>
                             )}

@@ -14,8 +14,8 @@ export const VpCard = (presentation) => (
                         Name
                     </span>
                     <span className="text-sm">
-                        {getAttribute(presentation, 'given_name')}{' '}
-                        {getAttribute(presentation, 'family_name')}
+                        {getAttribute(presentation, 'givenName')}{' '}
+                        {getAttribute(presentation, 'familyName')}
                     </span>
                 </div>
 
