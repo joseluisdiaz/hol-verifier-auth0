@@ -5,6 +5,8 @@ import styles from '../styles/index.module.css'
 import { useRouter } from 'next/router'
 import { cn } from '../utils/cn'
 import Image from 'next/image'
+import {MdlCard} from "../components/mdlCard";
+import {VpCard} from "../components/vpCard";
 
 const NON_STARTED = 'non_started'
 const MDL_WAITING = 'mdl_waiting'
@@ -106,6 +108,7 @@ export default function Home() {
                 presentation.verifiableCredential.map(parseJwt)
             setPresentationVP(presentation)
             setStatus(VP_VERIFIED)
+            console.log(JSON.stringify(presentation, null, 2))
         } catch (err) {
             console.log(err)
         }
@@ -168,12 +171,11 @@ export default function Home() {
                 </h1>
 
                 <div className="w-full">
-                    <Image
-                        className="rounded-[20px] border-4 border-black/5 bg-white/10 shadow-2xl backdrop-blur-3xl"
-                        src="./assets/card.svg"
-                        width={400}
-                        height={200}
-                    />
+                    {presentationMDL && (MdlCard(presentationMDL.presentation))}
+                </div>
+
+                <div className="w-full">
+                    {presentationVP && (VpCard(presentationVP.verifiableCredential[0]))}
                 </div>
 
                 <div className="flex w-full flex-col gap-4">
@@ -195,7 +197,7 @@ export default function Home() {
                             </p>
                         )}
 
-                        {status === MDL_FETCHING && <div />}
+                        {status === MDL_FETCHING && <div/>}
 
                         {status === VP_WAITING && (
                             <div>
@@ -213,7 +215,7 @@ export default function Home() {
                                     </a>{' '}
                                     to open wallet and preset your VC credential
                                 </p>
-                                <Loader />
+                                <Loader/>
                             </div>
                         )}
 
