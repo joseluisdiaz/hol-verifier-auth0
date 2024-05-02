@@ -151,7 +151,12 @@ export default function Home() {
     }
 
     return (
-        <div className={cn('h-screen w-full flex-col', 'bg-white')}>
+        <div
+            className={cn(
+                'h-screen w-full flex-col',
+                'bg-white text-neutral-700'
+            )}
+        >
             <Head>
                 <title>Verifier App Demo</title>
             </Head>
@@ -227,16 +232,21 @@ export default function Home() {
                                 bounce: 0.5,
                             }}
                             className={cn(
-                                'h-56 w-full rounded-[26px] border-8 border-black/20 bg-stone-100 p-5 shadow-xl backdrop-blur-2xl',
-                                presentationVP && 'h-80'
+                                'flex h-56 w-full flex-col gap-4 rounded-[26px] border-8 border-black/20 bg-stone-100 p-5 shadow-xl backdrop-blur-2xl',
+                                presentationVP && 'h-full'
                             )}
                         >
-                            {!presentationVP &&
-                                presentationMDL &&
+                            {presentationMDL &&
                                 MdlCard(presentationMDL.presentation)}
 
-                            {presentationVP &&
-                                VpCard(presentationVP.verifiableCredential[0])}
+                            {presentationVP && (
+                                <>
+                                    <hr className="h-0.5 w-full bg-stone-200" />
+                                    {VpCard(
+                                        presentationVP.verifiableCredential[0]
+                                    )}
+                                </>
+                            )}
                         </motion.div>
 
                         <motion.div
@@ -250,7 +260,7 @@ export default function Home() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="text-center"
+                                    className="text-center text-neutral-700"
                                 >
                                     <a
                                         className={cn(
@@ -272,7 +282,7 @@ export default function Home() {
 
                             {status === VP_WAITING && (
                                 <motion.div className="flex flex-col items-center gap-4">
-                                    <p className="text-center">
+                                    <p className="text-center text-neutral-700">
                                         <a
                                             className={cn(
                                                 'mr-0.5 font-semibold text-[#046B99]',
