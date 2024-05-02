@@ -205,35 +205,29 @@ export default function Home() {
                         </h1>
 
                         <motion.div
+                            layout
                             initial={{
-                                scale: 0.5,
                                 y: 50,
+                                rotate: 7.5,
                                 opacity: 0,
-                                background:
-                                    !presentationMDL &&
-                                    !presentationVP &&
-                                    'rgb(245 245 244)',
                             }}
                             animate={{
-                                scale: 1,
                                 y: 0,
+                                rotate: 0,
                                 opacity: 1,
-                                background:
-                                    !presentationMDL &&
-                                    !presentationVP &&
-                                    'rgb(245 245 244)',
                             }}
                             exit={{
-                                scale: 0.5,
                                 y: 50,
                                 opacity: 0,
-                                background:
-                                    !presentationMDL &&
-                                    !presentationVP &&
-                                    'rgb(245 245 244)',
+                                rotate: -7.5,
+                            }}
+                            transition={{
+                                duration: 0.35,
+                                type: 'spring',
+                                bounce: 0.5,
                             }}
                             className={cn(
-                                'h-56 w-full rounded-[26px] border-8 border-black/20 p-4 shadow-xl backdrop-blur-2xl'
+                                'h-56 w-full rounded-[26px] border-8 border-black/20 bg-stone-100 p-4 shadow-xl backdrop-blur-2xl'
                             )}
                         >
                             {presentationMDL &&
@@ -296,50 +290,59 @@ export default function Home() {
                             )}
 
                             {status === VP_VERIFIED && (
-                                <p className="text-center text-sm">All Done</p>
+                                <motion.p className="text-center text-sm">
+                                    All Done
+                                </motion.p>
                             )}
 
-                            <motion.div className="flex h-24 flex-col justify-end gap-2">
-                                {status === NON_STARTED && (
-                                    <button
-                                        className={cn(
-                                            'w-full cursor-pointer rounded-2xl bg-[#046B99] px-8 py-4 text-sm font-semibold text-white shadow-button',
-                                            'hover:bg-[#046B99]/90',
-                                            'focus-within:shadow-button-focus',
-                                            'transition-all duration-150 ease-out'
-                                        )}
-                                        onClick={onClickMdl}
-                                    >
-                                        Start MDL Presentation Flow
-                                    </button>
-                                )}
-                                {status === MDL_VERIFIED && (
-                                    <button
-                                        className={cn(
-                                            'w-full cursor-pointer rounded-2xl bg-[#046B99] px-8 py-4 text-sm font-semibold text-white shadow-button',
-                                            'hover:bg-[#046B99]/90',
-                                            'focus-within:shadow-button-focus',
-                                            'transition-all duration-150 ease-out'
-                                        )}
-                                        onClick={onClickVP}
-                                    >
-                                        Start VC Presentation Flow
-                                    </button>
-                                )}
-                                {status !== NON_STARTED && (
-                                    <button
-                                        className={cn(
-                                            'w-full cursor-pointer rounded-2xl border border-stone-300 bg-white px-4 py-3 font-semibold text-stone-700 shadow-sm outline-none',
-                                            'hover:bg-stone-50',
-                                            'focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.08)]',
-                                            'transition-all duration-150 ease-in-out'
-                                        )}
-                                        onClick={reset}
-                                    >
-                                        Reset
-                                    </button>
-                                )}
-                            </motion.div>
+                            <AnimatePresence>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="flex h-24 flex-col justify-end gap-2"
+                                >
+                                    {status === NON_STARTED && (
+                                        <motion.button
+                                            className={cn(
+                                                'w-full cursor-pointer rounded-2xl bg-[#046B99] px-8 py-4 text-sm font-semibold text-white shadow-button',
+                                                'hover:bg-[#046B99]/90',
+                                                'focus-within:shadow-button-focus',
+                                                'transition-all duration-150 ease-out'
+                                            )}
+                                            onClick={onClickMdl}
+                                        >
+                                            Start MDL Presentation Flow
+                                        </motion.button>
+                                    )}
+                                    {status === MDL_VERIFIED && (
+                                        <motion.button
+                                            className={cn(
+                                                'w-full cursor-pointer rounded-2xl bg-[#046B99] px-8 py-4 text-sm font-semibold text-white shadow-button',
+                                                'hover:bg-[#046B99]/90',
+                                                'focus-within:shadow-button-focus',
+                                                'transition-all duration-150 ease-out'
+                                            )}
+                                            onClick={onClickVP}
+                                        >
+                                            Start VC Presentation Flow
+                                        </motion.button>
+                                    )}
+                                    {status !== NON_STARTED && (
+                                        <motion.button
+                                            className={cn(
+                                                'w-full cursor-pointer rounded-2xl border border-stone-300 bg-white px-4 py-3 font-semibold text-stone-700 shadow-sm outline-none',
+                                                'hover:bg-stone-50',
+                                                'focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.08)]',
+                                                'transition-all duration-150 ease-in-out'
+                                            )}
+                                            onClick={reset}
+                                        >
+                                            Reset
+                                        </motion.button>
+                                    )}
+                                </motion.div>
+                            </AnimatePresence>
                         </motion.div>
                     </div>
                 </AnimatePresence>
