@@ -227,10 +227,11 @@ export default function Home() {
                                 bounce: 0.5,
                             }}
                             className={cn(
-                                'h-56 w-full rounded-[26px] border-8 border-black/20 bg-stone-100 p-4 shadow-xl backdrop-blur-2xl'
+                                'h-56 w-full rounded-[26px] border-8 border-black/20 bg-stone-100 p-5 shadow-xl backdrop-blur-2xl'
                             )}
                         >
-                            {presentationMDL &&
+                            {!presentationVP &&
+                                presentationMDL &&
                                 MdlCard(presentationMDL.presentation)}
 
                             {presentationVP &&

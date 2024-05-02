@@ -41,7 +41,7 @@ export const MdlCard = (presentation) => (
 
                 <div className="flex flex-col">
                     <span className="text-[#046B99 text-xs uppercase">
-                        Date of Birth:
+                        Date of Birth
                     </span>
                     <span className="text-sm">
                         {getAttribute(presentation, 'birth_date')}
@@ -50,7 +50,7 @@ export const MdlCard = (presentation) => (
 
                 <div className="flex flex-col">
                     <span className="text-[#046B99 text-xs uppercase">
-                        Expiry day:
+                        Expiry date
                     </span>
                     <span className="text-sm">
                         {getAttribute(presentation, 'expiry_date')}
@@ -61,7 +61,7 @@ export const MdlCard = (presentation) => (
             <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
                     <span className="text-[#046B99 text-xs uppercase">
-                        Driving Licence:
+                        Driving Licence
                     </span>
                     <span className="text-sm">
                         {getAttribute(presentation, 'document_number')}
@@ -70,7 +70,7 @@ export const MdlCard = (presentation) => (
 
                 <div className="flex flex-col">
                     <span className="text-[#046B99 text-xs uppercase">
-                        Address:
+                        Address
                     </span>
                     <span className="text-sm">
                         {getAttribute(presentation, 'resident_addres')},
@@ -82,7 +82,7 @@ export const MdlCard = (presentation) => (
 
                 <div className="flex flex-col">
                     <span className="text-[#046B99 text-xs uppercase">
-                        Issuing Jurisdiction:
+                        Issuing Jurisdiction
                     </span>
                     <span className="text-sm">
                         {getAttribute(presentation, 'issuing_jurisdiction')}
