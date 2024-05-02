@@ -10,7 +10,7 @@ export const VpCard = (presentation) => (
         <motion.div className="flex flex-row gap-2">
             <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Name
                     </span>
                     <span className="text-sm">
@@ -20,7 +20,7 @@ export const VpCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Condition
                     </span>
                     <span className="text-sm">
@@ -29,7 +29,7 @@ export const VpCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Diagnosis Date
                     </span>
                     <span className="text-sm">
@@ -38,7 +38,7 @@ export const VpCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Licensing Authority
                     </span>
                     <span className="text-sm">
@@ -49,7 +49,7 @@ export const VpCard = (presentation) => (
 
             <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Medical Provider Name
                     </span>
                     <span className="text-sm">
@@ -58,7 +58,7 @@ export const VpCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Medical Provider License Number
                     </span>
                     <span className="text-sm">
@@ -70,7 +70,7 @@ export const VpCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Medical Provider License Type
                     </span>
                     <span className="text-sm">

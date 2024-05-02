@@ -30,7 +30,7 @@ export const MdlCard = (presentation) => (
         <motion.div className="flex flex-row gap-2">
             <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Name
                     </span>
                     <span className="text-sm">
@@ -40,7 +40,7 @@ export const MdlCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Date of Birth
                     </span>
                     <span className="text-sm">
@@ -49,7 +49,7 @@ export const MdlCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Expiry date
                     </span>
                     <span className="text-sm">
@@ -60,7 +60,7 @@ export const MdlCard = (presentation) => (
 
             <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Driving Licence
                     </span>
                     <span className="text-sm">
@@ -69,7 +69,7 @@ export const MdlCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Address
                     </span>
                     <span className="text-sm">
@@ -81,7 +81,7 @@ export const MdlCard = (presentation) => (
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-[#046B99 text-xs uppercase">
+                    <span className="text-xs uppercase text-[#046B99]">
                         Issuing Jurisdiction
                     </span>
                     <span className="text-sm">
