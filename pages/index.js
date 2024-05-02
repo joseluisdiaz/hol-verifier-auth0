@@ -3,6 +3,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Loader } from '../components/loader'
 import styles from '../styles/index.module.css'
 import { useRouter } from 'next/router'
+import { cn } from '../utils/cn'
+import Image from 'next/image'
 
 const NON_STARTED = 'non_started'
 const MDL_WAITING = 'mdl_waiting'
@@ -144,15 +146,32 @@ export default function Home() {
     }
 
     return (
-        <div className={styles.container}>
+        <div
+            className={cn(
+                'flex h-screen w-full flex-col items-center justify-center',
+                'bg-stone-50',
+                'dark:bg-stone-950'
+            )}
+        >
             <Head>
                 <title>Verifier App Demo</title>
             </Head>
 
-            <main className={styles.main}>
-                <h1 className={styles.title}>Credential Verification</h1>
+            <main
+                className={cn(
+                    'flex h-[720px] w-full max-w-md flex-col items-center gap-10 p-10',
+                    'rounded-[40px] border border-stone-200 bg-white shadow-xl'
+                )}
+            >
+                <h1 className="w-full text-center text-3xl font-bold text-stone-900">
+                    Credential Verification
+                </h1>
 
-                <div className={styles.loaderContainer}>
+                <div>
+                    <Image src="./assets/card.svg" width={400} height={200} />
+                </div>
+
+                <div className="">
                     {status === NON_STARTED && (
                         <button className={styles.button} onClick={onClickMdl}>
                             Start MDL Presentation Flow
