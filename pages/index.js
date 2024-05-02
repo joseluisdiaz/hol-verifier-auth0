@@ -159,7 +159,7 @@ export default function Home() {
 
             <main
                 className={cn(
-                    'flex h-[720px] w-full max-w-md flex-col items-center gap-10 p-10',
+                    'flex h-[720px] w-full max-w-md flex-col items-center justify-between gap-10 px-10 py-20 pb-10',
                     'rounded-[40px] border border-stone-200 bg-white shadow-xl'
                 )}
             >
@@ -167,56 +167,103 @@ export default function Home() {
                     Credential Verification
                 </h1>
 
-                <div>
-                    <Image src="./assets/card.svg" width={400} height={200} />
+                <div className="w-full">
+                    <Image
+                        className="rounded-[20px] border-4 border-black/5 bg-white/10 shadow-2xl backdrop-blur-3xl"
+                        src="./assets/card.svg"
+                        width={400}
+                        height={200}
+                    />
                 </div>
 
-                <div className="">
-                    {status === NON_STARTED && (
-                        <button className={styles.button} onClick={onClickMdl}>
-                            Start MDL Presentation Flow
-                        </button>
-                    )}
-                </div>
+                <div className="flex w-full flex-col gap-4">
+                    <div className="flex h-24 flex-col text-stone-500">
+                        {status === MDL_WAITING && (
+                            <p className="text-center">
+                                <a
+                                    className={cn(
+                                        'mr-1 rounded-lg px-1 py-1 font-semibold text-indigo-500',
+                                        'hover:text-indigo-700',
+                                        'focus-within:shadow-button-focus'
+                                    )}
+                                    href={url}
+                                    rel="noreferrer"
+                                >
+                                    Click here
+                                </a>
+                                to open wallet and preset your MDL credential
+                            </p>
+                        )}
 
-                {status === MDL_WAITING && (
-                    <p>
-                        Click{' '}
-                        <a href={url} rel="noreferrer">
-                            HERE
-                        </a>{' '}
-                        to open wallet and preset your MDL credential
-                    </p>
-                )}
+                        {status === MDL_FETCHING && <div />}
 
-                {status === MDL_FETCHING && <div />}
+                        {status === VP_WAITING && (
+                            <div>
+                                <p className="text-center">
+                                    <a
+                                        className={cn(
+                                            'mr-0.5 font-semibold text-indigo-500',
+                                            'hover:text-indigo-700'
+                                        )}
+                                        href={url}
+                                        rel="noreferrer"
+                                        target="_blank"
+                                    >
+                                        Click here
+                                    </a>{' '}
+                                    to open wallet and preset your VC credential
+                                </p>
+                                <Loader />
+                            </div>
+                        )}
 
-                {status === MDL_VERIFIED && (
-                    <button className={styles.button} onClick={onClickVP}>
-                        Start VC Presentation Flow
-                    </button>
-                )}
-
-                {status === VP_WAITING && (
-                    <div>
-                        <p>
-                            Click{' '}
-                            <a href={url} rel="noreferrer" target="_blank">
-                                HERE
-                            </a>{' '}
-                            to open wallet and preset your VC credential
-                        </p>
-                        <Loader />
+                        {status === VP_VERIFIED && (
+                            <p className="text-center text-sm">All Done</p>
+                        )}
                     </div>
-                )}
 
-                {status === VP_VERIFIED && <p> All Done</p>}
-
-                {status !== NON_STARTED && (
-                    <button className={styles.reset} onClick={reset}>
-                        Reset
-                    </button>
-                )}
+                    <div className="flex h-24 flex-col justify-end gap-2">
+                        {status === NON_STARTED && (
+                            <button
+                                className={cn(
+                                    'shadow-button w-full cursor-pointer rounded-2xl bg-indigo-500 px-8 py-4 text-sm font-semibold text-white',
+                                    'hover:bg-indigo-600',
+                                    'focus-within:shadow-button-focus',
+                                    'transition-all duration-150 ease-out'
+                                )}
+                                onClick={onClickMdl}
+                            >
+                                Start MDL Presentation Flow
+                            </button>
+                        )}
+                        {status === MDL_VERIFIED && (
+                            <button
+                                className={cn(
+                                    'shadow-button w-full cursor-pointer rounded-2xl bg-indigo-500 px-8 py-4 text-sm font-semibold text-white',
+                                    'hover:bg-indigo-600',
+                                    'focus-within:shadow-button-focus',
+                                    'transition-all duration-150 ease-out'
+                                )}
+                                onClick={onClickVP}
+                            >
+                                Start VC Presentation Flow
+                            </button>
+                        )}
+                        {status !== NON_STARTED && (
+                            <button
+                                className={cn(
+                                    'w-full cursor-pointer rounded-2xl border border-stone-300 bg-white px-4 py-3 font-semibold text-stone-700 shadow-sm outline-none',
+                                    'hover:bg-stone-50',
+                                    'focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.08)]',
+                                    'transition-all duration-150 ease-in-out'
+                                )}
+                                onClick={reset}
+                            >
+                                Reset
+                            </button>
+                        )}
+                    </div>
+                </div>
             </main>
         </div>
     )
