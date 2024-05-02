@@ -27,6 +27,8 @@ export const MdlCard = (presentation) =>
     <div>
         <p> Name: {getAttribute(presentation, 'given_name')} {getAttribute(presentation, 'family_name')}</p>
         <p> Date of Birth: {getAttribute(presentation, 'birth_date')}</p>
-        <p> Expirty day: {getAttribute(presentation, 'expiry_date')}</p>
+        <p> Expiry day: {getAttribute(presentation, 'expiry_date')}</p>
         <p> Driving Licence: {getAttribute(presentation, 'document_number')}</p>
+        <p> Address: {getAttribute(presentation, 'resident_addres')}, {getAttribute(presentation, 'resident_city')}, {getAttribute(presentation, 'resident_state')}, {getAttribute(presentation, 'resident_country')}</p>
+        <p> Issuing Jurisdiction: {getAttribute(presentation, 'issuing_jurisdiction')}</p>
     </div>;
