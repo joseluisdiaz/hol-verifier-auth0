@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Loader } from '../components/loader'
-import styles from '../styles/index.module.css'
 import { useRouter } from 'next/router'
 import { cn } from '../utils/cn'
 import Image from 'next/image'
-import {MdlCard} from "../components/mdlCard";
-import {VpCard} from "../components/vpCard";
+import { MdlCard } from '../components/mdlCard'
+import { VpCard } from '../components/vpCard'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const NON_STARTED = 'non_started'
 const MDL_WAITING = 'mdl_waiting'
@@ -18,6 +18,8 @@ const VP_VERIFIED = 'vp_verified'
 export default function Home() {
     const [presentationVP, setPresentationVP] = useState()
     const [presentationMDL, setPresentationMDL] = useState()
+
+    const [loading, setLoading] = useState(true)
 
     const [status, setStatus] = useState(NON_STARTED)
     const [url, setUrl] = useState('')
@@ -149,123 +151,198 @@ export default function Home() {
     }
 
     return (
-        <div
-            className={cn(
-                'flex h-screen w-full flex-col items-center justify-center',
-                'bg-stone-50',
-                'dark:bg-stone-950'
-            )}
-        >
+        <div className={cn('h-screen w-full flex-col', 'bg-white')}>
             <Head>
                 <title>Verifier App Demo</title>
             </Head>
 
-            <main
+            <header
                 className={cn(
-                    'flex h-[720px] w-full max-w-md flex-col items-center justify-between gap-10 px-10 py-20 pb-10',
-                    'rounded-[40px] border border-stone-200 bg-white shadow-xl'
+                    'z-10 flex w-full flex-col justify-center border-b-[5px] border-[#FDB81E] bg-white'
                 )}
             >
-                <h1 className="w-full text-center text-3xl font-bold text-stone-900">
-                    Credential Verification
-                </h1>
-
-                <div className="w-full">
-                    {presentationMDL && (MdlCard(presentationMDL.presentation))}
+                <div className="flex h-14 items-center justify-center bg-[#046B99] px-10">
+                    <div className="w-full max-w-6xl">
+                        <Image
+                            alt="CA"
+                            onLoadingComplete={() => setLoading(false)}
+                            className={cn(
+                                'w-12',
+                                loading && 'scale-50 blur-xl'
+                            )}
+                            src="/assets/logo-top.png"
+                            width={200}
+                            height={80}
+                        />
+                    </div>
                 </div>
-
-                <div className="w-full">
-                    {presentationVP && (VpCard(presentationVP.verifiableCredential[0]))}
+                <div className="flex h-20 items-center justify-center px-10">
+                    <div className="w-full max-w-6xl">
+                        <Image
+                            alt="Edu"
+                            onLoadingComplete={() => setLoading(false)}
+                            className={cn(
+                                'w-40',
+                                loading && 'scale-50 blur-xl'
+                            )}
+                            src="/assets/logo-main.png"
+                            width={200}
+                            height={80}
+                        />
+                    </div>
                 </div>
+            </header>
 
-                <div className="flex w-full flex-col gap-4">
-                    <div className="flex h-24 flex-col text-stone-500">
-                        {status === MDL_WAITING && (
-                            <p className="text-center">
-                                <a
-                                    className={cn(
-                                        'mr-1 rounded-lg px-1 py-1 font-semibold text-indigo-500',
-                                        'hover:text-indigo-700',
-                                        'focus-within:shadow-button-focus'
-                                    )}
-                                    href={url}
-                                    rel="noreferrer"
-                                >
-                                    Click here
-                                </a>
-                                to open wallet and preset your MDL credential
-                            </p>
+            <main className="flex h-screen w-full items-start justify-center">
+                <AnimatePresence mode="wait">
+                    <div
+                        className={cn(
+                            'flex h-[720px] w-full max-w-md flex-col items-center gap-10 px-10 py-20 pb-10'
                         )}
+                    >
+                        <h1 className="serif w-full text-center text-3xl font-semibold text-stone-900">
+                            Credential Verification
+                        </h1>
 
-                        {status === MDL_FETCHING && <div/>}
+                        <motion.div
+                            initial={{
+                                scale: 0.5,
+                                y: 50,
+                                opacity: 0,
+                                background:
+                                    !presentationMDL &&
+                                    !presentationVP &&
+                                    'rgb(245 245 244)',
+                            }}
+                            animate={{
+                                scale: 1,
+                                y: 0,
+                                opacity: 1,
+                                background:
+                                    !presentationMDL &&
+                                    !presentationVP &&
+                                    'rgb(245 245 244)',
+                            }}
+                            exit={{
+                                scale: 0.5,
+                                y: 50,
+                                opacity: 0,
+                                background:
+                                    !presentationMDL &&
+                                    !presentationVP &&
+                                    'rgb(245 245 244)',
+                            }}
+                            className={cn(
+                                'h-56 w-full rounded-[26px] border-8 border-black/20 p-4 shadow-xl backdrop-blur-2xl'
+                            )}
+                        >
+                            {presentationMDL &&
+                                MdlCard(presentationMDL.presentation)}
 
-                        {status === VP_WAITING && (
-                            <div>
-                                <p className="text-center">
+                            {presentationVP &&
+                                VpCard(presentationVP.verifiableCredential[0])}
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="flex w-full flex-col gap-4"
+                        >
+                            {status === MDL_WAITING && (
+                                <motion.p
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="text-center"
+                                >
                                     <a
                                         className={cn(
-                                            'mr-0.5 font-semibold text-indigo-500',
-                                            'hover:text-indigo-700'
+                                            'mr-1 rounded-lg px-1 py-1 font-semibold text-[#046B99]',
+                                            'hover:text-[#046B99]/90',
+                                            'focus-within:shadow-button-focus'
                                         )}
                                         href={url}
                                         rel="noreferrer"
-                                        target="_blank"
                                     >
                                         Click here
-                                    </a>{' '}
-                                    to open wallet and preset your VC credential
-                                </p>
-                                <Loader/>
-                            </div>
-                        )}
+                                    </a>
+                                    to open wallet and preset your MDL
+                                    credential
+                                </motion.p>
+                            )}
 
-                        {status === VP_VERIFIED && (
-                            <p className="text-center text-sm">All Done</p>
-                        )}
-                    </div>
+                            {status === MDL_FETCHING && <div />}
 
-                    <div className="flex h-24 flex-col justify-end gap-2">
-                        {status === NON_STARTED && (
-                            <button
-                                className={cn(
-                                    'shadow-button w-full cursor-pointer rounded-2xl bg-indigo-500 px-8 py-4 text-sm font-semibold text-white',
-                                    'hover:bg-indigo-600',
-                                    'focus-within:shadow-button-focus',
-                                    'transition-all duration-150 ease-out'
+                            {status === VP_WAITING && (
+                                <motion.div className="flex flex-col items-center gap-4">
+                                    <p className="text-center">
+                                        <a
+                                            className={cn(
+                                                'mr-0.5 font-semibold text-[#046B99]',
+                                                'hover:text-[#046B99]/90'
+                                            )}
+                                            href={url}
+                                            rel="noreferrer"
+                                            target="_blank"
+                                        >
+                                            Click here
+                                        </a>{' '}
+                                        to open wallet and preset your VC
+                                        credential
+                                    </p>
+                                    <Loader />
+                                </motion.div>
+                            )}
+
+                            {status === VP_VERIFIED && (
+                                <p className="text-center text-sm">All Done</p>
+                            )}
+
+                            <motion.div className="flex h-24 flex-col justify-end gap-2">
+                                {status === NON_STARTED && (
+                                    <button
+                                        className={cn(
+                                            'w-full cursor-pointer rounded-2xl bg-[#046B99] px-8 py-4 text-sm font-semibold text-white shadow-button',
+                                            'hover:bg-[#046B99]/90',
+                                            'focus-within:shadow-button-focus',
+                                            'transition-all duration-150 ease-out'
+                                        )}
+                                        onClick={onClickMdl}
+                                    >
+                                        Start MDL Presentation Flow
+                                    </button>
                                 )}
-                                onClick={onClickMdl}
-                            >
-                                Start MDL Presentation Flow
-                            </button>
-                        )}
-                        {status === MDL_VERIFIED && (
-                            <button
-                                className={cn(
-                                    'shadow-button w-full cursor-pointer rounded-2xl bg-indigo-500 px-8 py-4 text-sm font-semibold text-white',
-                                    'hover:bg-indigo-600',
-                                    'focus-within:shadow-button-focus',
-                                    'transition-all duration-150 ease-out'
+                                {status === MDL_VERIFIED && (
+                                    <button
+                                        className={cn(
+                                            'w-full cursor-pointer rounded-2xl bg-[#046B99] px-8 py-4 text-sm font-semibold text-white shadow-button',
+                                            'hover:bg-[#046B99]/90',
+                                            'focus-within:shadow-button-focus',
+                                            'transition-all duration-150 ease-out'
+                                        )}
+                                        onClick={onClickVP}
+                                    >
+                                        Start VC Presentation Flow
+                                    </button>
                                 )}
-                                onClick={onClickVP}
-                            >
-                                Start VC Presentation Flow
-                            </button>
-                        )}
-                        {status !== NON_STARTED && (
-                            <button
-                                className={cn(
-                                    'w-full cursor-pointer rounded-2xl border border-stone-300 bg-white px-4 py-3 font-semibold text-stone-700 shadow-sm outline-none',
-                                    'hover:bg-stone-50',
-                                    'focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.08)]',
-                                    'transition-all duration-150 ease-in-out'
+                                {status !== NON_STARTED && (
+                                    <button
+                                        className={cn(
+                                            'w-full cursor-pointer rounded-2xl border border-stone-300 bg-white px-4 py-3 font-semibold text-stone-700 shadow-sm outline-none',
+                                            'hover:bg-stone-50',
+                                            'focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.08)]',
+                                            'transition-all duration-150 ease-in-out'
+                                        )}
+                                        onClick={reset}
+                                    >
+                                        Reset
+                                    </button>
                                 )}
-                                onClick={reset}
-                            >
-                                Reset
-                            </button>
-                        )}
+                            </motion.div>
+                        </motion.div>
                     </div>
-                </div>
+                </AnimatePresence>
             </main>
         </div>
     )
