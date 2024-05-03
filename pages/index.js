@@ -125,7 +125,7 @@ export default function Home() {
             const { url } = await res.json()
             const walletUrl = url.replace(
                 'mdoc-openid4vp://',
-                'https://wallet.verifiablecredentials.dev/mdl/request'
+                'http://localhost:8000/mdl/request'
             )
             setUrl(walletUrl)
         } catch (err) {
