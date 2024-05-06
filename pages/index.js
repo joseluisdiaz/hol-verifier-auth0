@@ -125,7 +125,7 @@ export default function Home() {
             const { url } = await res.json()
             const walletUrl = url.replace(
                 'mdoc-openid4vp://',
-                'http://localhost:8000/mdl/request'
+                'https://id-wallet-to-be-deleted.vercel.app/mdl/request'
             )
             setUrl(walletUrl)
         } catch (err) {

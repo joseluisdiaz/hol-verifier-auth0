@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
+
 function getAttribute(presentation, key) {
     console.log(presentation)
     return presentation?.vc?.credentialSubject?.[key]
